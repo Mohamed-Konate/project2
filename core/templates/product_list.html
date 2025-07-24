@@ -1,17 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Catalogue de Produits - TechnoLAB</title>
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
 </head>
 <body>
-    <h1>Product List</h1>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Catalogue de Produits</h1>
+            <p>Découvrez notre sélection de produits de qualité</p>
+        </div>
 
-    {% for product in products %}
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.description }}</p>
-        <p>{{ product.price }}</p>
-    {% endfor %}
+        <div class="products-grid">
+            {% if products %}
+                {% for product in products %}
+                    <div class="product-card">
+                        <div class="product-image">
+                            📦
+                        </div>
+                        <div class="product-content">
+                            <h3 class="product-title">{{ product.name }}</h3>
+                            <p class="product-description">{{ product.description }}</p>
+                            <div class="product-price">{{ product.price }} €</div>
+                            <div class="product-actions">
+                                <button class="btn btn-primary">Ajouter au panier</button>
+                                <button class="btn btn-secondary">Détails</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="empty-state">
+                    <h2>📭 Aucun produit disponible</h2>
+                    <p>Il n'y a actuellement aucun produit dans notre catalogue.</p>
+                    <button class="btn btn-primary" onclick="location.reload()">Actualiser</button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{% static 'core/js/script.js' %}"></script>
 </body>
 </html>
